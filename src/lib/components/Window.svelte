@@ -226,7 +226,7 @@
 {/if}
 
 <style>
-  .window {
+/*  .window {
     position: absolute;
     background-color: #bbc5aa;
     border: 1px solid #000;
@@ -343,15 +343,6 @@
     box-shadow: 1px 1px 0 rgba(255,255,255,0.4), inset 1px 1px 0 rgba(0,0,0,0.2);
   }
 
-  /*.window-controls button:hover {
-    border-style: inset;
-  }
-
-  .window-controls button:active {
-    border-style: inset;
-    background-color: #aaa;
-  }*/
-
   .content {
     padding: 5px 20px;
     background-color: #e6eed6;
@@ -399,5 +390,5 @@
     left: 25%;
     width: 40%;
     transform: rotate(-45deg);
-  }
+  }*/
 </style>

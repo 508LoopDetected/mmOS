@@ -3,6 +3,7 @@
   import { writable } from 'svelte/store';
 
   import Window from '$lib/components/Window.svelte';
+  import ThemeSwitch from '$lib/components/ThemeSwitch.svelte';
 
   // Define a component mapping object
   const componentMapping = {
@@ -55,6 +56,8 @@
     openWindow('Window 1');
   });
 </script>
+
+<ThemeSwitch />
 
 <div class="dock">
   <button on:click={() => openWindow('about')} class="about">
