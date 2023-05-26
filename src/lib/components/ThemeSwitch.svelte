@@ -1,6 +1,6 @@
 <script>
   import { theme } from '$lib/themes/themeStore'
-  theme.set('tempo8'); // default theme
+  theme.set('sandy'); // default theme
 </script>
 
 <style>
@@ -37,14 +37,14 @@
     data-selected={$theme === 'sandy'}
     on:click={() => ($theme = 'sandy')}
   >
-    Sandy (Default)
+    Sandy
   </button>
   <button
     class="dropdown-option"
     data-selected={$theme === 'tempo8'}
     on:click={() => ($theme = 'tempo8')}
   >
-    Tempo 8.0
+    TempOS 8
   </button>
   <!-- Add more options as needed -->
 </div>
