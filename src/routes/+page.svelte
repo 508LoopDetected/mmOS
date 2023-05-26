@@ -69,18 +69,6 @@
     <i class="material-icons">mail</i>
     <span class="tooltip">Contact</span>
   </button>
-  <button on:click={() => openWindow('jimkirk')} class="jimkirk">
-    <i class="material-icons">person</i>
-    <span class="tooltip">Jimkirk</span>
-  </button>
-  <button on:click={() => openWindow('mrspock')} class="mrspock">
-    <i class="material-icons">star</i>
-    <span class="tooltip">Mrspock</span>
-  </button>
-  <button on:click={() => openWindow('foobar')} class="foobar">
-    <i class="material-icons">code</i>
-    <span class="tooltip">Foobar</span>
-  </button>
 </div>
 
 
