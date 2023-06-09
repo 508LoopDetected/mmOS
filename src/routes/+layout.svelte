@@ -2,6 +2,7 @@
 	//import '@picocss/pico/css/pico.css'
 	// import Desktop from '$lib/components/Desktop.svelte';
   import { theme } from '$lib/themes/themeStore'
+  import Cursor from '../lib/components/Cursor.svelte';
 </script>
 
 <svelte:head>
@@ -9,11 +10,16 @@
   $theme}/> <link rel="stylesheet" href={`/theme/${$theme}.css`} />
 </svelte:head>
 
+<Cursor />
+
 <main>  
   <slot />
 </main>
 
 <style>
+  :global(*) {
+    cursor: none !important;
+  }
   main {
     display: flex;
     flex-direction: column;
