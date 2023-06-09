@@ -4,6 +4,7 @@
 
   import Window from '$lib/components/Window.svelte';
   import ThemeSwitch from '$lib/components/ThemeSwitch.svelte';
+  import Desktop from '$lib/components/Desktop.svelte';
 
   // Define a component mapping object
   const componentMapping = {
@@ -71,6 +72,8 @@
   </button>
 </div>
 
+<Desktop />
+
 
 {#each $windows as window (window.name)}
   <Window
@@ -100,6 +103,7 @@
     width: 100%;
     background-color: #f0f0f0;
     padding: 10px;
+    z-index: 2;
   }
 
   .dock button {

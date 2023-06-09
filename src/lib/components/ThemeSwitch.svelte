@@ -9,6 +9,7 @@
     justify-content: center;
     gap: 10px;
     margin-top: 20px;
+    z-index: 2;
   }
 
   .dropdown-option {
