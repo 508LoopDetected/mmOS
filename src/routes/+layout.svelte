@@ -1,8 +1,23 @@
 <script>
 	//import '@picocss/pico/css/pico.css'
 	// import Desktop from '$lib/components/Desktop.svelte';
+  import { onMount } from 'svelte';
   import { theme } from '$lib/themes/themeStore'
   import Cursor from '../lib/components/Cursor.svelte';
+  onMount(() => {
+    window.addEventListener('click', handleOSClick)
+    return () => {
+      window.removeEventListener('click', handleOSClick)
+    }
+  });
+
+  function handleOSClick(e) {
+    document.querySelectorAll('.skos-app').forEach(app => app.classList.remove('is-focused'));
+
+    if (!e.target.closest('.skos-app')?.dataset.id) return;
+
+    e.target.closest('.skos-app').classList.add('is-focused');
+  }
 </script>
 
 <svelte:head>

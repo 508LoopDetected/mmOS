@@ -26,7 +26,7 @@
   }
 
   const handleMouseMove = e => {
-    mouse.state = e.target.closest('a, button') ? 1 : 0
+    mouse.state = e.target.closest('a, button, .skos-app') ? 1 : 0;
 
     mouse.x = e.clientX;
     mouse.y = e.clientY;
@@ -35,10 +35,22 @@
     cursor.style.top = `${mouse.y}px`;
   }
 
+  const handleMouseDown = () => {
+    mouse.state = mouse.state === 0 ? 1 : 0;
+  }
+
+  const handleMouseUp = (e) => {
+    mouse.state = mouse.state === 0 ? 1 : 0;
+  }
+
   onMount(() => {
     window.addEventListener('mouseover', handleMouseOver);
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mouseup', handleMouseUp);
     return () => {
       window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
     }
   });
 </script>

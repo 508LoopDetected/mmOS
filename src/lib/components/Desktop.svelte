@@ -1,32 +1,17 @@
 <script>
   import DesktopApp from "$lib/components/DesktopApp.svelte";
+  import { Apps } from '$lib/apps/Apps.js';
 
-  let currentFocusedId = '';
 
-  const unfocusIcons = (e) => {
-    if (!e.target.closest('.skos-app')) {
-      currentFocusedId = '';
-      console.log('whoops');
-    }
-
-  }
-
-  const focusIcon = (e) => {
-    currentFocusedId = e.detail.id;
-    // console.log(currentFocusedId);
-  }
 </script>
 
-<div id="skos-desktop" on:click={unfocusIcons}>
+<div id="skos-desktop" >
   <div id="skos-app-grid">
-    <DesktopApp id="0001" on:highlight={focusIcon} icon="/svg/recyclebin.svg" label="Recycle Bin" {currentFocusedId} />
-    <DesktopApp id="0002" on:highlight={focusIcon} icon="/svg/floppydisk.svg" label="My OS" {currentFocusedId} />
-    <DesktopApp id="0003" on:highlight={focusIcon} icon="/svg/cd.svg" label="Velvet Revolver - Contraband [2004]" {currentFocusedId} />
-    <DesktopApp id="0004" on:highlight={focusIcon} {currentFocusedId} />
-    <DesktopApp id="0005" on:highlight={focusIcon} {currentFocusedId} />
-    <DesktopApp id="0006" on:highlight={focusIcon} {currentFocusedId} />
-    <DesktopApp id="0007" on:highlight={focusIcon} {currentFocusedId} />
-    <DesktopApp id="0008" on:highlight={focusIcon} icon="/svg/txt.svg" label="passwords.txt" {currentFocusedId} />
+    {#each Apps as app }
+      {#if app.isOnDesktop }
+        <DesktopApp id={app.id} icon={app.icon || '/svg/folder.svg'} label={app.label || 'New Folder'} />
+      {/if}
+    {/each}
   </div>
 </div>
 

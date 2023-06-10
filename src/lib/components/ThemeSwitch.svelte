@@ -5,17 +5,18 @@
 
 <style>
   .dropdown {
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
+    gap: 10px; */
+    margin: 20px auto;
     z-index: 2;
   }
 
   .dropdown-option {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: inline;
+    /* align-items: center; */
+    /* justify-content: center; */
+    margin-inline: 0.25rem;
     padding: 10px 20px;
     background-color: #f5f5f5;
     border: none;
