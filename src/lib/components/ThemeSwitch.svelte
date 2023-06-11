@@ -5,33 +5,36 @@
 
 <style>
   .dropdown {
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
+    gap: 10px; */
+    margin: 20px auto;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .dropdown h3 {
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
   }
 
   .dropdown-option {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: inline;
+    /* align-items: center; */
+    /* justify-content: center; */
+    margin-inline: 0.25rem;
     padding: 10px 20px;
-    background-color: #f5f5f5;
-    border: none;
-    border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
     outline: none;
     transition: background-color 0.3s;
   }
-
-  .dropdown-option:hover,
-  .dropdown-option[data-selected="true"] {
-    background-color: #e0e0e0;
-  }
 </style>
 
 <div class="dropdown">
+  <h3>Choose Your Flavor</h3>
   <button
     class="dropdown-option"
     data-selected={$theme === 'sandy'}
@@ -44,7 +47,7 @@
     data-selected={$theme === 'tempo8'}
     on:click={() => ($theme = 'tempo8')}
   >
-    TempOS 8
+    Tempo
   </button>
   <!-- Add more options as needed -->
 </div>
