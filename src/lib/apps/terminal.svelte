@@ -34,7 +34,7 @@
     flex: 1;
     background-color: #000;
     color: #fff;
-    font-family: monospace;
+    font-family: "Dank Mono", monospace;
     overflow-y: auto;
     padding: 10px;
     height: 100%;
@@ -44,7 +44,7 @@
     background-color: transparent;
     border: none;
     color: #fff;
-    font-family: monospace;
+    font-family: "Dank Mono", monospace;
     outline: none;
     font-size: 16px;
   }
