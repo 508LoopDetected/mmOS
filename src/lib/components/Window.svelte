@@ -227,13 +227,16 @@
 
 
 <style>
-  #window-doom.window .content,
-  #window-app8.window .content {
+  #window-doom.window .content {
     padding: 0;
     overflow: hidden;
     width: 640px;
     height: 400px;
     background-color: #333;
+  }
+  #window-terminal.window .content {
+    padding: 0;
+    overflow: hidden;
   }
 /*  .window {
     position: absolute;
