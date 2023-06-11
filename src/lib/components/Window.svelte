@@ -69,8 +69,8 @@
   }
 
   function handleClose() {
-    isVisible = false; // Hide or remove the window component
-    removeWindow();
+    const windowElement = document.getElementById(`window-${title}`);
+    windowElement.remove();
     dispatch('windowClosed');
   }
 
@@ -225,7 +225,16 @@
 </div>
 {/if}
 
+
 <style>
+  #window-doom.window .content,
+  #window-app8.window .content {
+    padding: 0;
+    overflow: hidden;
+    width: 640px;
+    height: 400px;
+    background-color: #333;
+  }
 /*  .window {
     position: absolute;
     background-color: #bbc5aa;

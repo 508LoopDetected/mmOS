@@ -1,5 +1,5 @@
 main {
-    background: #008081 url('/dol.png');
+    background: #008081 url('/wallpaper/dolphins-sm.png');
     /*background: #666 url('/bg.jpg');*/
 }
 .window {
@@ -176,3 +176,99 @@ main {
   width: 40%;
   transform: rotate(-45deg);
 }
+
+
+
+  /* Theme Selector */
+  .dropdown button.dropdown-option {
+    background-color: #bbbbbb;
+    border: 1px solid #000;
+    border-radius: 5px;
+    box-shadow: inset 1px 1px 0 rgba(255,255,255,0.4), 5px 5px 0 rgba(0,0,0,0.1);
+    font-family: "Dank Mono", monospace;
+    font-size: 16px;
+    color: #000;
+    border-radius: 5px;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.4);
+  }
+  .dropdown button.dropdown-option:hover,
+  .dropdown button.dropdown-option[data-selected="true"] {
+    background-color: #9999ff;
+    color: #fff;
+    text-shadow: -1px -1px 0 rgba(0,0,0,0.5);
+  }
+
+
+
+
+
+
+
+  .dock {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    position: fixed;
+    bottom: 10px;
+    width: auto;
+    padding: 10px;
+    z-index: 2;
+    background-color: #bbbbbb;
+    border: 1px solid #000;
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.1), inset 1px 1px 0 #cccccc;
+    font-family: "Dank Mono", monospace;
+    font-size: 16px;
+    color: #000;
+    border-radius: 5px;
+  }
+
+  .dock button {
+    margin: 0 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0.4);
+    background-color: #cccccc;
+    color: #000;
+    margin-right: 0;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.4);
+    box-shadow: 1px 1px 0 rgba(255,255,255,0.4), inset 1px 1px 0 rgba(0,0,0,0.2);
+    font-size: 14px;
+    cursor: pointer;
+    position: relative;
+  }
+  .dock button:first-child {
+    margin-left: 0;
+  }
+
+  .dock button i {
+    font-size: 24px;
+  }
+
+  .dock button .tooltip {
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+    text-shadow: none;
+  }
+
+  .dock button:hover .tooltip {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .systray {
+    padding: 5px 10px 5px 20px;
+    text-align: center;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.4);
+  }
+  .systray img {
+    width: 32px;
+  }

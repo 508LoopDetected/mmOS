@@ -1,42 +1,48 @@
 export const Apps = [
   {
     id: 1,
-    label: 'Recycling Bin',
-    icon: '/svg/recyclebin.svg',
+    label: 'Bin',
+    slug: 'contact',
+    icon: '/icons/icons8-full-trash-100.png',
     path: 'Users/mm/Desktop',
     isOnDesktop: 1
   },
   {
     id: 2,
-    label: 'My Compy',
-    icon: '/svg/floppydisk.svg',
+    label: 'Compy',
+    slug: 'about',
+    icon: '/icons/icons8-home-office-100.png',
     path: 'Users/mm',
     isOnDesktop: 1
   },
   {
     id: 3,
-    label: 'Velvet Revolver - Contraband [2004]',
-    icon: '/svg/cd.svg',
+    label: 'Muzak Library',
+    slug: 'muzak',
+    icon: '/icons/icons8-music-library-100.png',
     path: 'Users/mm/Library/Music',
     isOnDesktop: 1
   },
   {
     id: 4,
     label: 'Mr. Potatohead pics',
-    icon: null,
+    slug: 'folder-pics',
+    icon: '/icons/icons8-pictures-folder-100.png',
     path: 'Users/mm/Library/Pictures',
     isOnDesktop: 1
   },
   {
     id: 5,
     label: '80s Music',
-    icon: null,
+    slug: 'folder-music',
+    icon: '/icons/icons8-music-folder-100.png',
     path: 'Users/mm/Library/Music',
     isOnDesktop: 1
   },
   {
     id: 6,
     label: null,
+    slug: 'new',
     icon: null,
     path: 'Users/mm/Desktop',
     isOnDesktop: 1
@@ -44,21 +50,24 @@ export const Apps = [
   {
     id: 7,
     label: 'Videos',
+    slug: 'folder-videos',
     icon: null,
     path: 'Users/mm/Library',
     isOnDesktop: 0
   },
   {
     id: 8,
-    label: 'Doom.exe',
-    icon: '/images/doom.png',
-    path: 'Users/mm/Games/Doom',
+    label: 'Doom',
+    slug: 'doom',
+    icon: '/icons/icons8-doom-logo-100.png',
+    path: '$lib/apps/doom.svelte',
     isOnDesktop: 1
   },
   {
     id: 9,
     label: 'passwords.txt',
-    icon: '/svg/txt.svg',
+    slug: 'pwds',
+    icon: '/icons/icons8-note-100.png',
     path: 'Users/mm/Documents',
     isOnDesktop: 1
   },
