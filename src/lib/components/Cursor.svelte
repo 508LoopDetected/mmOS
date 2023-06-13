@@ -33,6 +33,12 @@
     
     cursor.style.left = `${mouse.x}px`;
     cursor.style.top = `${mouse.y}px`;
+
+    if (mouse.y > window.innerHeight - 25) {
+      document.body.classList.add('showDock');
+    } else {
+      document.body.classList.remove('showDock');
+    }
   }
 
   const handleMouseDown = () => {

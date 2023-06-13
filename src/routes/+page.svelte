@@ -43,5 +43,43 @@
 <Desktop />
 
 <style>
+  .dock {
+    transition: all 0.4s cubic-bezier(.47,1.64,.41,.8);;
+    transition-delay: 0.25s;
 
+    transform: translateY(calc(100% + 0px));
+  }
+  .dock::before {
+    content: '⌃';
+    position: absolute;
+    text-align: center;
+    line-height: 2;
+    font-size: 1.5rem;
+    color: #888;
+    left: 50%;
+    top: 0;
+    width: 50px;
+    height: 25px;
+    transform: translate(-50%, -80%);
+    border-top-left-radius: 50% 100%;
+    border-top-right-radius: 50% 100%;
+    border: 1px solid #444;
+    border-bottom: none;
+    background-color: #bbc5aa;
+
+    transition: all 0.3s ease;
+    transition-delay: 0.4s;
+  }
+  :global(body.showDock .dock) {
+    transform: translateY(0);
+  }
+  :global(body.showDock .dock::before) {
+    transform: scaleY(0);
+    opacity: 0;
+    transition-delay: 0.15s;
+  }
+
+  .dock:hover {
+    transform: translateY(0);
+  }
 </style>
