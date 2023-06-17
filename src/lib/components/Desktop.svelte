@@ -4,6 +4,7 @@
   import DesktopApp from "$lib/components/DesktopApp.svelte";
   import { Apps } from '$lib/apps/Apps.js';
   import Window from '$lib/components/Window.svelte';
+  import TaskManager from '$lib/components/TaskManager.svelte';
 
 
   const componentMapping = {};
@@ -90,6 +91,8 @@
     {/if}
   </Window>
 {/each}
+
+<TaskManager />
 
 
 <style>
