@@ -5,7 +5,6 @@
   import { Apps } from '$lib/apps/Apps.js';
   import Window from '$lib/components/Window.svelte';
 
-
   const componentMapping = {};
   Apps.forEach((app) => {
     if (app.slug) {
@@ -14,12 +13,12 @@
   });
 
   let windows = writable([]);
+  let windowRefs = {};
 
   const dispatch = createEventDispatcher();
 
   export function openWindow(windowName) {
     let existingWindow = $windows.find((w) => w.name === windowName);
-    console.log('Existing Window:', existingWindow);
     if (!existingWindow) {
       let highestZIndex = Math.max(...$windows.map((w) => w.zIndex), 0);
       let newWindow = {
@@ -28,23 +27,23 @@
         component: null,
       };
 
-      // Load the component dynamically based on the mapping
       const componentLoader = componentMapping[windowName];
       if (componentLoader) {
         componentLoader().then((module) => {
           newWindow.component = module.default;
           windows.update((winArr) => [...winArr, newWindow]);
-          console.log('Updated Windows:', $windows);
           dispatch('windowOpened', { window: newWindow });
         });
       }
-
-      console.log('New Window:', newWindow);
     }
   }
 
   function closeWindow(window) {
+    if (windowRefs[window.name] && windowRefs[window.name].stopDoom) {
+      windowRefs[window.name].stopDoom();
+    }
     windows.update((winArr) => winArr.filter((w) => w !== window));
+    delete windowRefs[window.name];
   }
 
   function handleClick(window) {
@@ -53,21 +52,25 @@
     windows.update((winArr) => [...winArr]);
   }
 
+  function handleComponentMount(event, window) {
+    windowRefs[window.name] = event.detail.component;
+  }
+
   onMount(() => {
     openWindow('Window 1');
   });
 </script>
 
-<div id="skos-desktop" >
+<div id="skos-desktop">
   <div id="skos-app-grid">
-    {#each Apps as app }
-      {#if app.isOnDesktop }
+    {#each Apps as app}
+      {#if app.isOnDesktop}
         <DesktopApp
           id={app.id}
           slug={app.slug}
           icon={app.icon || '/icons/icons8-opened-folder-100.png'}
           label={app.label || 'New Folder'}
-          openWindow={openWindow}
+          {openWindow}
         />
       {/if}
     {/each}
@@ -86,11 +89,13 @@
     key={window.name}
   >
     {#if window.component !== null}
-      <svelte:component this={window.component} />
+      <svelte:component 
+        this={window.component} 
+        on:mounted={(event) => handleComponentMount(event, window)}
+      />
     {/if}
   </Window>
 {/each}
-
 
 <style>
   #skos-desktop {

@@ -23,14 +23,14 @@ export const Apps = [
     path: null,
     isOnDesktop: 1
   },
-  {
+/*  {
     id: 4,
     label: 'Doom',
     slug: 'doom',
     icon: '/icons/icons8-doom-logo-100.png',
     path: '$lib/apps/doom.svelte',
     isOnDesktop: 1
-  },
+  },*/
   {
     id: 5,
     label: 'Muzak Library',

@@ -169,6 +169,9 @@
       startX = event.clientX;
       startY = event.clientY;
       updateWindowManager();
+      
+      // Prevent text selection
+      document.body.style.userSelect = 'none';
     }
   }
 
@@ -184,6 +187,9 @@
   function handleResizeMouseUp() {
     if (isResizing) {
       isResizing = false;
+      
+      // Re-enable text selection
+      document.body.style.userSelect = '';
     }
   }
 
