@@ -21,7 +21,7 @@
         'documents': {},
         'pictures': {
           'wallpaper': {
-            'hey.txt': 'heyyyy'
+            'hey.txt': 'heyyyyy'
           }
         },
         'downloads': {
