@@ -23,32 +23,40 @@ export const Apps = [
     path: null,
     isOnDesktop: 1
   },
-/*  {
+  {
     id: 4,
+    label: 'Hacker News',
+    slug: 'hacker_news',
+    icon: '/icons/icons8-browser-100.png',
+    path: null,
+    isOnDesktop: 1
+  },
+  {
+    id: 5,
     label: 'Doom',
     slug: 'doom',
     icon: '/icons/icons8-doom-logo-100.png',
     path: '$lib/apps/doom.svelte',
-    isOnDesktop: 1
-  },*/
+    isOnDesktop: 0
+  },
   {
-    id: 5,
+    id: 6,
     label: 'Muzak Library',
     slug: 'muzak',
     icon: '/icons/icons8-music-library-100.png',
     path: 'Users/mm/Library/Music',
-    isOnDesktop: 1
+    isOnDesktop: 0
   },
   {
-    id: 6,
+    id: 7,
     label: null,
     slug: 'new',
     icon: null,
     path: 'Users/mm/Desktop',
-    isOnDesktop: 1
+    isOnDesktop: 0
   },
   {
-    id: 7,
+    id: 8,
     label: 'Videos',
     slug: 'folder-videos',
     icon: null,
@@ -56,19 +64,19 @@ export const Apps = [
     isOnDesktop: 0
   },
   {
-    id: 8,
+    id: 9,
     label: 'Mr. Potatohead pics',
     slug: 'folder-pics',
     icon: '/icons/icons8-pictures-folder-100.png',
     path: 'Users/mm/Library/Pictures',
-    isOnDesktop: 1
+    isOnDesktop: 0
   },
   {
-    id: 9,
+    id: 10,
     label: 'passwords.txt',
     slug: 'passwords',
     icon: '/icons/icons8-note-100.png',
     path: 'Users/mm/Documents',
-    isOnDesktop: 1
+    isOnDesktop: 0
   },
 ]

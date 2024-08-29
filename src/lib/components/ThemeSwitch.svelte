@@ -1,6 +1,6 @@
 <script>
   import { theme } from '$lib/themes/themeStore'
-  theme.set('sandy'); // default theme
+  theme.set('tempo8'); // default theme
 </script>
 
 <style>
@@ -18,6 +18,7 @@
     color: #fff;
     border-radius: 5px;
     padding: 5px 10px;
+    font-weight: 500;
   }
 
   .dropdown-option {

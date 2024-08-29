@@ -244,6 +244,9 @@
     padding: 0;
     overflow: hidden;
   }
+  #window-hacker_news.window .content {
+    padding: 0;
+  }
 /*  .window {
     position: absolute;
     background-color: #bbc5aa;
