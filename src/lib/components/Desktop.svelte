@@ -16,76 +16,75 @@
     }
   });
 
-  // In your onMount function
   onMount(() => {
     openWindow('hacker_news');
   });
 
 
-// Helper function to log the current state of the windows store
-function logWindowsState(message) {
-  console.log(message, get(windows));
-}
-
-export function openWindow(windowSlug) {
-  let app = Apps.find(app => app.slug === windowSlug);
-  if (!app) {
-    console.error('No app found with slug:', windowSlug);
-    return;
+  // Log the current state of the windows store
+  function logWindowsState(message) {
+    console.log(message, get(windows));
   }
 
-  // Get the current state of the windows store
-  let currentWindows = get(windows);
-  let existingWindow = currentWindows.find((w) => w.slug === windowSlug);
-
-  if (!existingWindow) {
-    let highestZIndex = Math.max(...currentWindows.map((w) => w.zIndex || 0), 0);
-    let newWindow = {
-      slug: windowSlug,
-      label: app.label,
-      zIndex: highestZIndex + 1,
-      component: null,
-    };
-
-    console.log('Opening new window:', newWindow);
-
-    // Update the windows store
-    windows.update(winArr => {
-      return [...winArr, newWindow];
-    });
-
-    // Load the component dynamically based on the mapping
-    const componentLoader = componentMapping[windowSlug];
-    if (componentLoader) {
-      componentLoader().then((module) => {
-        windows.update(winArr => {
-          return winArr.map(w => 
-            w.slug === windowSlug ? {...w, component: module.default} : w
-          );
-        });
-        dispatch('windowOpened', { window: newWindow });
-      });
-    } else {
-      console.error('No component loader found for slug:', windowSlug);
+  export function openWindow(windowSlug) {
+    let app = Apps.find(app => app.slug === windowSlug);
+    if (!app) {
+      console.error('No app found with slug:', windowSlug);
+      return;
     }
-  } else {
-    console.log('Window already exists, bringing to front:', existingWindow);
-    handleClick(existingWindow);
+
+    // Get the current state of the windows store
+    let currentWindows = get(windows);
+    let existingWindow = currentWindows.find((w) => w.slug === windowSlug);
+
+    if (!existingWindow) {
+      let highestZIndex = Math.max(...currentWindows.map((w) => w.zIndex || 0), 0);
+      let newWindow = {
+        slug: windowSlug,
+        label: app.label,
+        zIndex: highestZIndex + 1,
+        component: null,
+      };
+
+      console.log('Opening new window:', newWindow);
+
+      // Update the windows store
+      windows.update(winArr => {
+        return [...winArr, newWindow];
+      });
+
+      // Load the component dynamically based on the mapping
+      const componentLoader = componentMapping[windowSlug];
+      if (componentLoader) {
+        componentLoader().then((module) => {
+          windows.update(winArr => {
+            return winArr.map(w => 
+              w.slug === windowSlug ? {...w, component: module.default} : w
+            );
+          });
+          dispatch('windowOpened', { window: newWindow });
+        });
+      } else {
+        console.error('No component loader found for slug:', windowSlug);
+      }
+    } else {
+      console.log('Window already exists, bringing to front:', existingWindow);
+      handleClick(existingWindow);
+    }
+
+    // Log the final state of windows after all operations
+    console.log('Current windows:', get(windows));
   }
 
-  // Log the final state of windows after all operations
-  console.log('Current windows:', get(windows));
-}
-
-function handleClick(window) {  
-  windows.update(winArr => {
-    let highestZIndex = Math.max(...winArr.map((w) => w.zIndex || 0), 0);
-    return winArr.map(w => 
-      w.slug === window.slug ? {...w, zIndex: highestZIndex + 1} : w
-    );
-  });
-  console.log('Window brought to front:', window);
-}
+  function handleClick(window) {  
+    windows.update(winArr => {
+      let highestZIndex = Math.max(...winArr.map((w) => w.zIndex || 0), 0);
+      return winArr.map(w => 
+        w.slug === window.slug ? {...w, zIndex: highestZIndex + 1} : w
+      );
+    });
+    console.log('Window brought to front:', window);
+  }
 
   function closeWindow(window) {
     if (windowRefs[window.name] && windowRefs[window.name].stopDoom) {
