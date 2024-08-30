@@ -1,42 +1,91 @@
 <script>
   import { onMount, createEventDispatcher } from 'svelte';
-  import { writable } from 'svelte/store';
+  import { writable, get } from 'svelte/store';
   import DesktopApp from "$lib/components/DesktopApp.svelte";
   import { Apps } from '$lib/apps/Apps.js';
   import Window from '$lib/components/Window.svelte';
 
+  let windows = writable([]);
+  let windowRefs = {};
+  const dispatch = createEventDispatcher();
   const componentMapping = {};
+
   Apps.forEach((app) => {
     if (app.slug) {
       componentMapping[app.slug] = () => import(`$lib/apps/${app.slug}.svelte`);
     }
   });
 
-  let windows = writable([]);
-  let windowRefs = {};
+  // In your onMount function
+  onMount(() => {
+    openWindow('hacker_news');
+  });
 
-  const dispatch = createEventDispatcher();
 
-  export function openWindow(windowName) {
-    let existingWindow = $windows.find((w) => w.name === windowName);
-    if (!existingWindow) {
-      let highestZIndex = Math.max(...$windows.map((w) => w.zIndex), 0);
-      let newWindow = {
-        name: windowName,
-        zIndex: highestZIndex + 1,
-        component: null,
-      };
+// Helper function to log the current state of the windows store
+function logWindowsState(message) {
+  console.log(message, get(windows));
+}
 
-      const componentLoader = componentMapping[windowName];
-      if (componentLoader) {
-        componentLoader().then((module) => {
-          newWindow.component = module.default;
-          windows.update((winArr) => [...winArr, newWindow]);
-          dispatch('windowOpened', { window: newWindow });
-        });
-      }
-    }
+export function openWindow(windowSlug) {
+  let app = Apps.find(app => app.slug === windowSlug);
+  if (!app) {
+    console.error('No app found with slug:', windowSlug);
+    return;
   }
+
+  // Get the current state of the windows store
+  let currentWindows = get(windows);
+  let existingWindow = currentWindows.find((w) => w.slug === windowSlug);
+
+  if (!existingWindow) {
+    let highestZIndex = Math.max(...currentWindows.map((w) => w.zIndex || 0), 0);
+    let newWindow = {
+      slug: windowSlug,
+      label: app.label,
+      zIndex: highestZIndex + 1,
+      component: null,
+    };
+
+    console.log('Opening new window:', newWindow);
+
+    // Update the windows store
+    windows.update(winArr => {
+      return [...winArr, newWindow];
+    });
+
+    // Load the component dynamically based on the mapping
+    const componentLoader = componentMapping[windowSlug];
+    if (componentLoader) {
+      componentLoader().then((module) => {
+        windows.update(winArr => {
+          return winArr.map(w => 
+            w.slug === windowSlug ? {...w, component: module.default} : w
+          );
+        });
+        dispatch('windowOpened', { window: newWindow });
+      });
+    } else {
+      console.error('No component loader found for slug:', windowSlug);
+    }
+  } else {
+    console.log('Window already exists, bringing to front:', existingWindow);
+    handleClick(existingWindow);
+  }
+
+  // Log the final state of windows after all operations
+  console.log('Current windows:', get(windows));
+}
+
+function handleClick(window) {  
+  windows.update(winArr => {
+    let highestZIndex = Math.max(...winArr.map((w) => w.zIndex || 0), 0);
+    return winArr.map(w => 
+      w.slug === window.slug ? {...w, zIndex: highestZIndex + 1} : w
+    );
+  });
+  console.log('Window brought to front:', window);
+}
 
   function closeWindow(window) {
     if (windowRefs[window.name] && windowRefs[window.name].stopDoom) {
@@ -46,19 +95,9 @@
     delete windowRefs[window.name];
   }
 
-  function handleClick(window) {
-    let highestZIndex = Math.max(...$windows.map((w) => w.zIndex), 0);
-    window.zIndex = highestZIndex + 1;
-    windows.update((winArr) => [...winArr]);
-  }
-
   function handleComponentMount(event, window) {
     windowRefs[window.name] = event.detail.component;
   }
-
-  onMount(() => {
-    openWindow('Window 1');
-  });
 </script>
 
 <div id="skos-desktop">
@@ -77,22 +116,20 @@
   </div>
 </div>
 
-{#each $windows as window (window.name)}
+{#each $windows as window (window.slug)}
   <Window
-    title={window.name}
+    title={window.label}
+    slug={window.slug}
     width={640}
     height={400}
-    on:windowOpened={() => openWindow(window.name)}
+    on:windowOpened={() => openWindow(window.slug)}
     on:windowClosed={() => closeWindow(window)}
     on:windowMouseDown={() => handleClick(window)}
     zIndex={window.zIndex}
-    key={window.name}
+    key={window.slug}
   >
     {#if window.component !== null}
-      <svelte:component 
-        this={window.component} 
-        on:mounted={(event) => handleComponentMount(event, window)}
-      />
+      <svelte:component this={window.component} />
     {/if}
   </Window>
 {/each}

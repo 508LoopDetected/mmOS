@@ -2,6 +2,7 @@
   import { onMount, createEventDispatcher } from 'svelte';
 
   export let title;
+  export let slug;
   export let width;
   export let height;
   export let zIndex;
@@ -31,7 +32,7 @@
   }
 
   onMount(() => {
-    const windowElement = document.getElementById(`window-${title}`);
+    const windowElement = document.getElementById(`window-${slug}`);
     windowElement.addEventListener('mousedown', handleClick);
 
     return () => {
@@ -69,7 +70,7 @@
   }
 
   function handleClose() {
-    const windowElement = document.getElementById(`window-${title}`);
+    const windowElement = document.getElementById(`window-${slug}`);
     windowElement.remove();
     dispatch('windowClosed');
   }
@@ -210,7 +211,7 @@
 </script>
 
 {#if isVisible}
-<div class={windowClasses} style={windowStyles} use:handleDrag id={`window-${title}`}>
+<div class={windowClasses} style={windowStyles} use:handleDrag id={`window-${slug}`}>
   <div class="window-inner">
     <div class="title-bar" on:click={updateWindowManager}>
       <div class="title">{title}</div>
