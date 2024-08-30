@@ -25,7 +25,7 @@
   $theme}/> <link rel="stylesheet" href={`/theme/${$theme}.css`} />
 </svelte:head>
 
-<Cursor />
+<!-- <Cursor /> -->
 
 <main>  
   <slot />
@@ -33,7 +33,7 @@
 
 <style>
   :global(*) {
-    cursor: none !important;
+    /*cursor: none !important;*/
   }
   main {
     display: flex;
