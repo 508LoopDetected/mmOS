@@ -17,7 +17,7 @@
   });
 
   onMount(() => {
-    openWindow('hacker_news');
+    openWindow('task_manager');
   });
 
 

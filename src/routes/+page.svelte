@@ -3,6 +3,7 @@
   import { writable } from 'svelte/store';
   import ThemeSwitch from '$lib/components/ThemeSwitch.svelte';
   import Desktop from '$lib/components/Desktop.svelte';
+  import Clock from '$lib/components/Clock.svelte';
 
   let currentDate = new Date();
   onMount(() => {
@@ -35,8 +36,7 @@
 
   <div class="systray">
     <img src="/icons/icons8-test-account-100.png" /><img src="/icons/icons8-settings-100.png" /><br/>
-    <strong>{currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</strong><br>
-    {currentDate.toLocaleString('en-US', { month: 'short', day: 'numeric' })}
+    <Clock />
   </div>
 </div>
 

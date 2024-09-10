@@ -79,4 +79,12 @@ export const Apps = [
     path: 'Users/mm/Documents',
     isOnDesktop: 0
   },
+  {
+    id: 11,
+    label: 'Task Manager',
+    slug: 'task_manager',
+    icon: '/icons/icons8-note-100.png',
+    path: 'Users/mm/Documents',
+    isOnDesktop: 1
+  },
 ]
